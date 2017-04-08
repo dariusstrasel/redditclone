@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+</head>
+<body>
+    <h1>Create Post</h1>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="{% url 'posts:create' %}">
+        {% csrf_token %}
+
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value={{ request.GET.next }}/>
+        {% endif %}
+
+        <label for="title">
+            <span>Title:</span>
+            <br>
+            <input type="text" name="title"/>
+        </label>
+        <br>
+        <label for="url">
+            <span>URL:</span>
+            <br>
+            <input type="text" name="url"/>
+        </label>
+        <br>
+        <br>
+        <input type="submit" name="submit" value="Post">
+    </form>
+</body>
+</html>
